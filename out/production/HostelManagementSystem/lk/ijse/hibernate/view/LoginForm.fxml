@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="loginFormContext" prefHeight="534.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hibernate.controller.LoginFormController">
+   <children>
+      <ImageView fitHeight="529.0" fitWidth="856.0" opacity="0.5" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../assets/images/727.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="343.0" fitWidth="375.0" layoutX="457.0" layoutY="130.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../assets/images/firstimg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="127.0" fitWidth="337.0" layoutX="374.0" layoutY="38.0" pickOnBounds="true">
+         <image>
+            <Image url="@../assets/images/Login2.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="21.0" layoutY="135.0" opacity="0.46" prefHeight="252.0" prefWidth="356.0" style="-fx-background-radius: 2.0em; -fx-background-color: #23e8fc;" />
+      <JFXTextField fx:id="txtUserName" focusColor="BLACK" labelFloat="true" layoutX="58.0" layoutY="165.0" prefHeight="45.0" prefWidth="243.0" promptText="User Name">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></JFXTextField>
+      <JFXPasswordField fx:id="txtPassword" focusColor="BLACK" labelFloat="true" layoutX="56.0" layoutY="256.0" prefHeight="45.0" prefWidth="243.0" promptText="Password">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></JFXPasswordField>
+      <JFXButton buttonType="RAISED" layoutX="58.0" layoutY="433.0" onAction="#btnLoginOnAction" prefHeight="54.0" prefWidth="268.0" style="-fx-background-color: #2980b9;" text="Login" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="lblWrong" layoutX="35.0" layoutY="307.0" prefHeight="39.0" prefWidth="295.0" textFill="#bc1717" />
+   </children>
+</AnchorPane>

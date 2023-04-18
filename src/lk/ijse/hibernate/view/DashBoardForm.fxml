@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="787.0" prefWidth="1356.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hibernate.controller.DashBoardFormController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b5d8f2" height="70.0" layoutX="258.0" stroke="#b5d8f2" strokeType="INSIDE" width="1098.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b5d8f2" height="809.0" layoutY="-7.0" stroke="#a3c3d3" strokeType="INSIDE" width="264.0" />
+      <AnchorPane fx:id="loadContext" blendMode="SRC_ATOP" layoutX="265.0" layoutY="70.0" prefHeight="730.0" prefWidth="1091.0" style="-fx-background-color: #ecf0f1;" />
+      <Label fx:id="lblDate" layoutX="852.0" layoutY="20.0" text="2023 - 04 - 18" textFill="#a10505">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTime" layoutX="1141.0" layoutY="20.0" text="20:04:36" textFill="#a10505">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="755.0" layoutY="17.0" text="Date :" textFill="#652929">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="1046.0" layoutY="17.0" text="Time : " textFill="#754040">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="1246.0" layoutY="22.0" onAction="#btnLogOutOnAction" prefHeight="25.0" prefWidth="79.0" styleClass="btnLogOut" stylesheets="@../assets/style/css.css" text="Log Out">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></JFXButton>
+      <JFXButton layoutX="28.0" layoutY="449.0" onAction="#btnRoomManagementOnAction" prefHeight="70.0" prefWidth="209.0" styleClass="btn" stylesheets="@../assets/style/css.css" text="Room Management" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../assets/images/icons8-waiting-room-50.png" />
+               </image></ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton layoutX="28.0" layoutY="324.0" onAction="#btnStudentManagement" prefHeight="70.0" prefWidth="209.0" styleClass="btn" stylesheets="@../assets/style/css.css" text="Student Management" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../assets/images/icons8-add-administrator-50.png" />
+               </image></ImageView>
+         </graphic>
+      </JFXButton>
+      <ImageView fitHeight="91.0" fitWidth="361.0" layoutX="9.0" layoutY="14.0" pickOnBounds="true">
+         <image>
+            <Image url="@../assets/images/Login2.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="28.0" layoutY="221.0" onAction="#btnRegistration" prefHeight="70.0" prefWidth="209.0" styleClass="btn" stylesheets="@../assets/style/css.css" text="Create Registration" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../assets/images/add.png" />
+               </image></ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton layoutX="28.0" layoutY="560.0" onAction="#btnUserManagementOnAction" prefHeight="70.0" prefWidth="209.0" styleClass="btn" stylesheets="@../assets/style/css.css" text="User Management" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../assets/images/icons8-user-30.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <Label layoutX="106.0" layoutY="747.0" prefHeight="30.0" prefWidth="131.0" text="Version 0.012" />
+   </children>
+</AnchorPane>

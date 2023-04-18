@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="496.0" prefWidth="708.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hibernate.controller.SplashSreenController">
+   <children>
+      <ImageView fitHeight="332.0" fitWidth="477.0" layoutX="112.0" layoutY="14.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../assets/images/firstimg.png" />
+         </image></ImageView>
+      <ImageView fitHeight="137.0" fitWidth="477.0" layoutX="123.0" layoutY="265.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../assets/images/Login2.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblLoading" layoutX="16.0" layoutY="415.0" prefHeight="29.0" prefWidth="311.0" text="Welcome to Hostal Management System">
+         <font>
+            <Font name="Myanmar Text Bold" size="12.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="rctContainer" arcHeight="5.0" arcWidth="5.0" fill="#4d09bc" height="17.0" layoutX="9.0" layoutY="444.0" stroke="BLACK" strokeType="INSIDE" width="690.0" />
+      <Rectangle fx:id="rctLoading" arcHeight="5.0" arcWidth="5.0" fill="#88e2fa" height="17.0" layoutX="9.0" layoutY="444.0" stroke="BLACK" strokeType="INSIDE" width="37.0" />
+      <Label layoutX="600.0" layoutY="474.0" prefHeight="17.0" prefWidth="83.0" text=" version 1.20.0" />
+   </children>
+</AnchorPane>
