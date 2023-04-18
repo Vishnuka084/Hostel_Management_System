@@ -27,7 +27,7 @@
             <Image url="@../assets/images/Login2.png" />
          </image>
       </ImageView>
-      <VBox layoutX="21.0" layoutY="135.0" opacity="0.46" prefHeight="252.0" prefWidth="356.0" style="-fx-background-radius: 2.0em; -fx-background-color: #23e8fc;" />
+      <VBox layoutX="21.0" layoutY="115.0" opacity="0.46" prefHeight="272.0" prefWidth="356.0" style="-fx-background-radius: 2.0em; -fx-background-color: #23e8fc;" />
       <JFXTextField fx:id="txtUserName" focusColor="BLACK" labelFloat="true" layoutX="58.0" layoutY="165.0" prefHeight="45.0" prefWidth="243.0" promptText="User Name">
          <font>
             <Font name="System Bold" size="15.0" />
