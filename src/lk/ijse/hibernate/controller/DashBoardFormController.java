@@ -86,7 +86,6 @@ public class DashBoardFormController {
         setUI("StudentManagementForm");
     }
 
-
     public void btnRegistration(ActionEvent actionEvent) throws IOException {
         setUI("RegistrationForm");
     }
