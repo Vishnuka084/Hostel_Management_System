@@ -2,12 +2,10 @@ package lk.ijse.hibernate.bo.custom.impl;
 
 import javafx.collections.ObservableList;
 import lk.ijse.hibernate.bo.custom.RegistrationBO;
+import lk.ijse.hibernate.dao.DAOFactory;
 import lk.ijse.hibernate.dao.custom.RegistrationDAO;
 import lk.ijse.hibernate.dao.custom.RoomDAO;
 import lk.ijse.hibernate.dao.custom.StudentDAO;
-import lk.ijse.hibernate.dao.custom.impl.RegistrationDAOImpl;
-import lk.ijse.hibernate.dao.custom.impl.RoomDAOImpl;
-import lk.ijse.hibernate.dao.custom.impl.StudentDAOImpl;
 import lk.ijse.hibernate.dto.RoomDTO;
 import lk.ijse.hibernate.dto.StudentDTO;
 import lk.ijse.hibernate.entity.Reservation;
@@ -24,11 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrationBOImpl implements RegistrationBO {
-    private final StudentDAO studentDAO = new StudentDAOImpl();
-    private final RoomDAO roomDAO = new RoomDAOImpl();
-    private final RegistrationDAO registrationDAO = new RegistrationDAOImpl();
+    private final StudentDAO studentDAO = (StudentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STUDENT);
+    private final RoomDAO roomDAO = (RoomDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ROOM);
+    private final RegistrationDAO registrationDAO = (RegistrationDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.REGISTRATION);
 
-
+    @Override
     public void Register(ObservableList<CartTM> list, String studentId, String lblId) throws Exception {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();

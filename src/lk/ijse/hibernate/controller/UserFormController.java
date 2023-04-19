@@ -3,20 +3,23 @@ package lk.ijse.hibernate.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import lk.ijse.hibernate.bo.BOFactory;
 import lk.ijse.hibernate.bo.custom.UserBO;
 import lk.ijse.hibernate.bo.custom.impl.UserBOImpl;
 import lk.ijse.hibernate.dto.UserDTO;
+import lk.ijse.hibernate.util.ValidationUtil;
 import lk.ijse.hibernate.view.tm.UserTM;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class UserFormController {
     public JFXTextField txtUserId;
@@ -35,7 +38,8 @@ public class UserFormController {
     public JFXTextField txtPassword;
     public JFXButton btnNew;
     public JFXButton btnDelete;
-    private final UserBO userBO = new UserBOImpl();
+    LinkedHashMap<TextField, Pattern> map = new LinkedHashMap<>();
+    private final UserBO userBO = (UserBO) BOFactory.getBOFactory().getBO(BOFactory.BOTypes.USER);
     public void initialize(){
         textClearAndBtnDisable();
         loadALLUsers();
@@ -70,6 +74,19 @@ public class UserFormController {
             }
         });
 
+        Pattern namePattern = Pattern.compile("^[A-z ]{3,30}$");
+        Pattern telNoPattern = Pattern.compile("^(?:7|0|(?:\\+94))(70|77|78|74|76|72|71)[0-9]{7}$");
+        Pattern eMailPattern = Pattern.compile("^[A-z0-9]{3,}@(gmail|ymail|yahoomail).com$");
+        Pattern userNamePattern = Pattern.compile("^[A-z0-9@.]{3,10}$");
+        Pattern passwordPattern = Pattern.compile("^[A-z0-9@.]{3,10}$");
+
+
+        map.put(txtName,namePattern);
+        map.put(txtTelNo,telNoPattern);
+        map.put(txtEmail,eMailPattern);
+        map.put(txtUserName,userNamePattern);
+        map.put(txtPassword,passwordPattern);
+
 
     }
 
@@ -77,7 +94,7 @@ public class UserFormController {
         try {
             List<UserDTO> allUsers = userBO.getAllUsers();
             for (UserDTO userDTO:allUsers
-                 ) {
+            ) {
                 tblUser.getItems().add(
                         new UserTM(userDTO.getUserId(),userDTO.getName(),userDTO.getTelNo(),userDTO.getEmail(),userDTO.getUserName(),userDTO.getPassword())
                 );
@@ -109,7 +126,7 @@ public class UserFormController {
 
     private void generateNewId() {
 
-       try {
+        try {
             String lastUserId = userBO.generateUserId();
             int newId = Integer.parseInt(lastUserId.substring(1, 4))+1;
             if (newId < 10) {
@@ -213,5 +230,18 @@ public class UserFormController {
         }
 
 
+    }
+
+    public void textFields_Key_Released(KeyEvent keyEvent) {
+        ValidationUtil.validate(map,btnSave);
+
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            Object response =  ValidationUtil.validate(map,btnSave);;
+
+            if (response instanceof TextField) {
+                TextField textField = (TextField) response;
+                textField.requestFocus();
+            }
+        }
     }
 }

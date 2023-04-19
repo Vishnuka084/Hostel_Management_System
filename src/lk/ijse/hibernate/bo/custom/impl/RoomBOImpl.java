@@ -1,6 +1,7 @@
 package lk.ijse.hibernate.bo.custom.impl;
 
 import lk.ijse.hibernate.bo.custom.RoomBO;
+import lk.ijse.hibernate.dao.DAOFactory;
 import lk.ijse.hibernate.dao.custom.RoomDAO;
 import lk.ijse.hibernate.dao.custom.impl.RoomDAOImpl;
 import lk.ijse.hibernate.dto.RoomDTO;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoomBOImpl implements RoomBO {
-    private final RoomDAO roomDAO = new RoomDAOImpl();
+    private final RoomDAO roomDAO = (RoomDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ROOM);
 
     @Override
     public boolean saveRoom(RoomDTO dto) throws Exception {
@@ -35,7 +36,7 @@ public class RoomBOImpl implements RoomBO {
         List<Room> all = roomDAO.getAll();
         List<RoomDTO> roomDTOS = new ArrayList<>();
         for (Room room:all
-             ) {
+        ) {
             roomDTOS.add(
                     new RoomDTO(room.getRoom_type_id(),room.getType(),room.getKey_money(),room.getQty())
             );

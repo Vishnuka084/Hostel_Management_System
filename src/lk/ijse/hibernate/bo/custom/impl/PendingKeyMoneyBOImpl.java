@@ -1,9 +1,11 @@
-
 package lk.ijse.hibernate.bo.custom.impl;
 
 import lk.ijse.hibernate.bo.custom.PendingKeyMoneyBO;
+import lk.ijse.hibernate.dao.DAOFactory;
 import lk.ijse.hibernate.dao.custom.QueryDAO;
+import lk.ijse.hibernate.dao.custom.RegistrationDAO;
 import lk.ijse.hibernate.dao.custom.impl.QueryDAOImpl;
+import lk.ijse.hibernate.dao.custom.impl.RegistrationDAOImpl;
 import lk.ijse.hibernate.dto.CustomDTO;
 
 import java.time.LocalDate;
@@ -11,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PendingKeyMoneyBOImpl implements PendingKeyMoneyBO {
-    final private  QueryDAO queryDAO = new QueryDAOImpl();
+    final private RegistrationDAO registrationDAO = (RegistrationDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.REGISTRATION);
+    final private  QueryDAO queryDAO = (QueryDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.QUERYDAO);
     @Override
     public ArrayList<CustomDTO> getAllPendingKeyMoneyReservationsUsingReservationStatus() throws Exception {
         List<Object[]> objects = queryDAO.getAllPendingKeyMoneyReservationsUsingReservationStatus();
@@ -23,5 +26,12 @@ public class PendingKeyMoneyBOImpl implements PendingKeyMoneyBO {
         }
 
         return arrayList;
+
+
+    }
+
+    @Override
+    public boolean updateReservationUsingId(String id, String status) throws Exception {
+        return registrationDAO.updateUsingId(id,status);
     }
 }

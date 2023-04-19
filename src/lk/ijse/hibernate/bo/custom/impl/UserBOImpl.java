@@ -1,6 +1,7 @@
 package lk.ijse.hibernate.bo.custom.impl;
 
 import lk.ijse.hibernate.bo.custom.UserBO;
+import lk.ijse.hibernate.dao.DAOFactory;
 import lk.ijse.hibernate.dao.custom.UserDAO;
 import lk.ijse.hibernate.dao.custom.impl.UserDAOImpl;
 import lk.ijse.hibernate.dto.UserDTO;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserBOImpl implements UserBO {
-    private final UserDAO userDAO = new UserDAOImpl();
+    private final UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
 
     @Override
     public boolean saveUser(UserDTO dto) throws Exception {
@@ -28,7 +29,7 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public boolean deleteUser(String id) throws Exception {
-         return userDAO.delete(id);
+        return userDAO.delete(id);
 
     }
 
@@ -47,7 +48,7 @@ public class UserBOImpl implements UserBO {
         List<User> all = userDAO.getAll();
         List<UserDTO> userDTOS = new ArrayList<>();
         for (User user:all
-             ) {
+        ) {
             userDTOS.add(new UserDTO(user.getUserId(),user.getName(),user.getTelNo(),user.getEmail(),user.getUserName(),user.getPassword()));
         }
         return userDTOS;

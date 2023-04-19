@@ -4,18 +4,21 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import lk.ijse.hibernate.bo.BOFactory;
 import lk.ijse.hibernate.bo.custom.RoomBO;
 import lk.ijse.hibernate.bo.custom.impl.RoomBOImpl;
 import lk.ijse.hibernate.dto.RoomDTO;
+import lk.ijse.hibernate.util.ValidationUtil;
 import lk.ijse.hibernate.view.tm.RoomTM;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class RoomManagementFormController {
     public TableView <RoomTM>tblRoom;
@@ -30,7 +33,8 @@ public class RoomManagementFormController {
     public JFXTextField txtKeyMoney;
     public TableColumn colKeyMoney;
     public JFXButton btnSave;
-    private final RoomBO roomBO = new RoomBOImpl();
+    private final RoomBO roomBO = (RoomBO) BOFactory.getBOFactory().getBO(BOFactory.BOTypes.ROOM);
+    LinkedHashMap<TextField, Pattern> map = new LinkedHashMap<>();
 
     public void initialize(){
 
@@ -61,6 +65,14 @@ public class RoomManagementFormController {
 
             }
         });
+        Pattern idPattern = Pattern.compile("^RM-[0-9]{4}$");
+        Pattern keyMoneyPattern = Pattern.compile("^[1-9][0-9]*(.[0-9]{1,2})?$");
+        Pattern qtyPattern = Pattern.compile("^[1-9][0-9]*$");
+
+        map.put(txtRoomTypeId,idPattern);
+        map.put(txtKeyMoney,keyMoneyPattern);
+        map.put(txtQty,qtyPattern);
+
     }
 
     private void loadAllRooms() {
@@ -68,7 +80,7 @@ public class RoomManagementFormController {
             List<RoomDTO> allRooms = roomBO.getAllRooms();
             for (RoomDTO roomDTO:allRooms) {
                 tblRoom.getItems().add(
-                       new RoomTM(roomDTO.getRoom_type_id(),roomDTO.getType(),roomDTO.getKey_money(),roomDTO.getQty())
+                        new RoomTM(roomDTO.getRoom_type_id(),roomDTO.getType(),roomDTO.getKey_money(),roomDTO.getQty())
                 );
             }
         } catch (IOException e) {
@@ -168,5 +180,18 @@ public class RoomManagementFormController {
             e.printStackTrace();
         }
 
+    }
+
+    public void textFields_Key_Released(KeyEvent keyEvent) {
+        ValidationUtil.validate(map,btnSave);
+
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            Object response = ValidationUtil.validate(map, btnSave);
+
+            if (response instanceof TextField) {
+                TextField textField = (TextField) response;
+                textField.requestFocus();// if there is a error just focus it
+            }
+        }
     }
 }
