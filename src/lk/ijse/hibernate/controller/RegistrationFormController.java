@@ -241,6 +241,9 @@ public class RegistrationFormController {
 
             }
 
+            registrationBO.Register(tblCart.getItems(),cmbStudentId.getValue(),lblReservation.getText());
+            System.out.println(tblCart.getItems());
+
 
 
         } catch (Exception e) {
