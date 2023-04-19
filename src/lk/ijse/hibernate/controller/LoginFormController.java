@@ -32,8 +32,6 @@ public class LoginFormController {
 
         }else if (txtUserName.getText()!=null&& txtPassword.getText()!=null){
            // List<UserDTO> userDetails = logBO.getUserDetails(txtUserName.getText(), txtPassword.getText());
-
-
             setUI("DashBoardForm");
 
         }else {
@@ -50,7 +48,7 @@ public class LoginFormController {
         Scene scene = new Scene(load);
         Stage stage2= new Stage();
         stage2.setTitle("Hostel Management System");
-        Image image = new Image("/lk/ijse/hibernate/assets/images/SoftwareIcon.png");
+        Image image = new Image("/lk/ijse/hibernate/assets/images/Login2.png");
         stage2.getIcons().add(image);
         stage2.setScene(scene);
         stage2.centerOnScreen();
