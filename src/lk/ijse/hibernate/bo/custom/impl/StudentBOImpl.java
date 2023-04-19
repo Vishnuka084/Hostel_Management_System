@@ -3,7 +3,6 @@ package lk.ijse.hibernate.bo.custom.impl;
 import lk.ijse.hibernate.bo.custom.StudentBO;
 import lk.ijse.hibernate.dao.DAOFactory;
 import lk.ijse.hibernate.dao.custom.StudentDAO;
-import lk.ijse.hibernate.dao.custom.impl.StudentDAOImpl;
 import lk.ijse.hibernate.dto.StudentDTO;
 import lk.ijse.hibernate.entity.Student;
 
@@ -40,7 +39,7 @@ public class StudentBOImpl implements StudentBO {
         List<Student> all = studentDAO.getAll();
         List<StudentDTO> dtos = new ArrayList<>();
         for (Student s:all
-        ) {
+             ) {
             dtos.add(
                     new StudentDTO(s.getStudent_id(),s.getName(),s.getAddress(),s.getContact_no(),s.getDob(),s.getGender())
             );

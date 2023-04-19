@@ -115,9 +115,9 @@ public class RegistrationBOImpl implements RegistrationBO {
         List<Room> list = roomDAO.getRoomDetailUsingId(id);
         List<RoomDTO> dtoList = new ArrayList<>();
         for (Room roomDTO:list
-        ) {
+             ) {
             dtoList.add(
-                    new RoomDTO(roomDTO.getRoom_type_id(),roomDTO.getType(),roomDTO.getKey_money(),roomDTO.getQty())
+                   new RoomDTO(roomDTO.getRoom_type_id(),roomDTO.getType(),roomDTO.getKey_money(),roomDTO.getQty())
             );
         }
         return dtoList;
@@ -130,7 +130,7 @@ public class RegistrationBOImpl implements RegistrationBO {
         for (Student student:list
         ) {
             dtoList.add(
-                    new StudentDTO(student.getStudent_id(),student.getName(),student.getAddress(),student.getContact_no(),student.getDob(),student.getGender())
+                  new StudentDTO(student.getStudent_id(),student.getName(),student.getAddress(),student.getContact_no(),student.getDob(),student.getGender())
             );
         }
         return dtoList;

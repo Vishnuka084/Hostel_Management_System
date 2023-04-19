@@ -3,9 +3,7 @@ package lk.ijse.hibernate.bo.custom.impl;
 import lk.ijse.hibernate.bo.custom.RoomBO;
 import lk.ijse.hibernate.dao.DAOFactory;
 import lk.ijse.hibernate.dao.custom.RoomDAO;
-import lk.ijse.hibernate.dao.custom.impl.RoomDAOImpl;
 import lk.ijse.hibernate.dto.RoomDTO;
-import lk.ijse.hibernate.dto.StudentDTO;
 import lk.ijse.hibernate.entity.Room;
 
 import java.io.IOException;
@@ -36,7 +34,7 @@ public class RoomBOImpl implements RoomBO {
         List<Room> all = roomDAO.getAll();
         List<RoomDTO> roomDTOS = new ArrayList<>();
         for (Room room:all
-        ) {
+             ) {
             roomDTOS.add(
                     new RoomDTO(room.getRoom_type_id(),room.getType(),room.getKey_money(),room.getQty())
             );

@@ -15,11 +15,11 @@ public class BOFactory {
     }
 
     public enum BOTypes {
-        LOG,PENDINGKEYMONEY,REGISTRATION,ROOM,STUDENT,USER
+       LOG,PENDINGKEYMONEY,REGISTRATION,ROOM,STUDENT,USER
     }
 
 
-    public SuperBO getBO(BOFactory.BOTypes types) {
+    public SuperBO getBO(BOTypes types) {
         switch (types) {
             case LOG:
                 return new LogBOImpl();

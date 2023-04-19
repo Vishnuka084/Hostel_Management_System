@@ -1,6 +1,7 @@
 package lk.ijse.hibernate.bo.custom.impl;
 
 import lk.ijse.hibernate.bo.custom.LogBO;
+import lk.ijse.hibernate.dao.DAOFactory;
 import lk.ijse.hibernate.dao.custom.UserDAO;
 import lk.ijse.hibernate.dto.UserDTO;
 import lk.ijse.hibernate.entity.User;
@@ -18,8 +19,7 @@ public class LogBOImpl implements LogBO {
         List<UserDTO> userDTOS = new ArrayList<>();
         for (User user:list
         ) {
-            userDTOS.add(new UserDTO(user.getUserId(),user.getName(),user.getTelNo(),
-                    user.getEmail(),user.getUserName(),user.getPassword()));
+            userDTOS.add(new UserDTO(user.getUserId(),user.getName(),user.getTelNo(),user.getEmail(),user.getUserName(),user.getPassword()));
         }
         return userDTOS;
 

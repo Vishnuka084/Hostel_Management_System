@@ -3,12 +3,8 @@ package lk.ijse.hibernate.bo.custom.impl;
 import lk.ijse.hibernate.bo.custom.UserBO;
 import lk.ijse.hibernate.dao.DAOFactory;
 import lk.ijse.hibernate.dao.custom.UserDAO;
-import lk.ijse.hibernate.dao.custom.impl.UserDAOImpl;
 import lk.ijse.hibernate.dto.UserDTO;
 import lk.ijse.hibernate.entity.User;
-import lk.ijse.hibernate.util.FactoryConfiguration;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +25,7 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public boolean deleteUser(String id) throws Exception {
-        return userDAO.delete(id);
+         return userDAO.delete(id);
 
     }
 
@@ -48,7 +44,7 @@ public class UserBOImpl implements UserBO {
         List<User> all = userDAO.getAll();
         List<UserDTO> userDTOS = new ArrayList<>();
         for (User user:all
-        ) {
+             ) {
             userDTOS.add(new UserDTO(user.getUserId(),user.getName(),user.getTelNo(),user.getEmail(),user.getUserName(),user.getPassword()));
         }
         return userDTOS;
