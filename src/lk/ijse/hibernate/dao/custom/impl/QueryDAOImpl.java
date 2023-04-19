@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QueryDAOImpl implements QueryDAO {
@@ -15,7 +14,7 @@ public class QueryDAOImpl implements QueryDAO {
     public List<Object[]> getAllPendingKeyMoneyReservationsUsingReservationStatus(String status) throws Exception {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("SELECT s.student_id,  ss.res_id,s.name,ss.status,ss.date FROM Student s INNER JOIN Reservation ss ON s.student_id = ss.student.student_id WHERE ss.status= : s");
+        Query query = session.createQuery("SELECT  ss.res_id,s.student_id, s.name,s.address,s.contact_no,ss.status,ss.date FROM Student s INNER JOIN Reservation ss ON s.student_id = ss.student.student_id WHERE ss.status= : s");
 
 
         query.setParameter("s",status);
