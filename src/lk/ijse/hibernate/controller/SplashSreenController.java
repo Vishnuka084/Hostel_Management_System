@@ -50,8 +50,8 @@ public class SplashSreenController {
         });
         KeyFrame keyFrame7= new KeyFrame(Duration.millis(3000),actionEvent ->{
             try {
-                URL resource = this.getClass().getResource("/lk/ijse/hibernate/view/LoginForm.fxml");
                 Image image = new Image("/lk/ijse/hibernate/assets/images/Login2.png");
+                URL resource = this.getClass().getResource("/lk/ijse/hibernate/view/LoginForm.fxml");
                 Stage stage = new Stage();
                 AnchorPane container = FXMLLoader.load(resource);
                 AnchorPane pneContainer = (AnchorPane)container.lookup("#pneContainer");

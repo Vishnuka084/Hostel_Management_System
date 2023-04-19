@@ -72,7 +72,7 @@ public class RegistrationFormController {
         setStudentId();
         setRoomId();
         generateNewId();
-        
+
         txtName.setEditable(false);
         txtAddress.setEditable(false);
         txtContactNo.setEditable(false);
@@ -88,70 +88,73 @@ public class RegistrationFormController {
 
         cmbStudentId.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             enableOrDisableRegisterButton();
-            try {
-                List<StudentDTO> list = registrationBO.getStudentDetailUsingId(newValue);
-                for (StudentDTO dto:list
-                     ) {
-                    txtName.setText(dto.getName());
-                    txtAddress.setText(dto.getAddress());
-                    txtContactNo.setText(dto.getContact_no());
+            if (newValue != null) {
+                try {
+                    List<StudentDTO> list = registrationBO.getStudentDetailUsingId(newValue);
+                    for (StudentDTO dto : list
+                    ) {
+                        txtName.setText(dto.getName());
+                        txtAddress.setText(dto.getAddress());
+                        txtContactNo.setText(dto.getContact_no());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+            }else {
 
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-
         });
 
         cmbRoomTypeId.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             btnAddToCart.setDisable(newValue==null);
-           if (newValue != null){
-               try {
-                   List<RoomDTO> list = registrationBO.getRoomDetailUsingId(newValue);
-                   for (RoomDTO dto:list
-                   ) {
-                       txtType.setText(dto.getType());
-                       Optional<CartTM> tm = tblCart.getItems().stream().filter(detail -> detail.getRoom_type_id().equals(newValue)).findFirst();
+            if (newValue != null){
+                try {
+                    List<RoomDTO> list = registrationBO.getRoomDetailUsingId(newValue);
+                    for (RoomDTO dto:list
+                    ) {
+                        txtType.setText(dto.getType());
+                        Optional<CartTM> tm = tblCart.getItems().stream().filter(detail -> detail.getRoom_type_id().equals(newValue)).findFirst();
 
-                       txtQty.setText(String.valueOf(tm.isPresent() ? dto.getQty()- 1 : dto.getQty()));
-                       txtKeyMoney.setText(String.valueOf(dto.getKey_money()));
-                   }
+                        txtQty.setText(String.valueOf(tm.isPresent() ? dto.getQty()- 1 : dto.getQty()));
+                        txtKeyMoney.setText(String.valueOf(dto.getKey_money()));
+                    }
 
-               } catch (Exception e) {
-                   e.printStackTrace();
-               }
-           }else {
-               txtType.clear();
-               txtKeyMoney.clear();
-               txtQty.clear();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else {
+                txtType.clear();
+                txtKeyMoney.clear();
+                txtQty.clear();
 
-           }
+            }
 
         });
 
         cmbPaymentStatus.getItems().addAll("Paid","Paid Later");
         cmbPaymentStatus.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-           if (newValue!=null){
-               if (newValue.equals("Paid")){
-                   txtAmount.setDisable(false);
-                   lblEnterCashAmount.setDisable(false);
-               }else {
-                   txtAmount.setDisable(true);
-                   lblEnterCashAmount.setDisable(true);
-               }
-           }
+            if (newValue!=null){
+                if (newValue.equals("Paid")){
+                    txtAmount.setDisable(false);
+                    lblEnterCashAmount.setDisable(false);
+                }else {
+                    txtAmount.setDisable(true);
+                    lblEnterCashAmount.setDisable(true);
+                }
+            }
         });
 
 
-        
+
     }
 
     private void setRoomId() {
         try {
             List<RoomDTO> allRooms = registrationBO.getAllRooms();
             for (RoomDTO dto:allRooms
-                 ) {
-             cmbRoomTypeId.getItems().add(dto.getRoom_type_id());
+            ) {
+                cmbRoomTypeId.getItems().add(dto.getRoom_type_id());
             }
 
         } catch (IOException e) {
@@ -163,7 +166,7 @@ public class RegistrationFormController {
         try {
             List<StudentDTO> allStudents = registrationBO.getAllStudents();
             for (StudentDTO dto:allStudents
-                 ) {
+            ) {
                 cmbStudentId.getItems().add(dto.getStudent_id());
             }
         } catch (IOException e) {
@@ -172,16 +175,16 @@ public class RegistrationFormController {
     }
 
     public void btnAddToCartOnAction(ActionEvent actionEvent) {
-       String roomTypeId = cmbRoomTypeId.getValue();
-       String type = txtType.getText();
-       Double keyMoney = Double.valueOf(txtKeyMoney.getText());
-       String status = cmbPaymentStatus.getValue();
+        String roomTypeId = cmbRoomTypeId.getValue();
+        String type = txtType.getText();
+        Double keyMoney = Double.valueOf(txtKeyMoney.getText());
+        String status = cmbPaymentStatus.getValue();
 
-       if(btnAddToCart.getText().equals("Save")){
+        if(btnAddToCart.getText().equals("Save")){
 
-       }else {
-           tblCart.getItems().add(new CartTM(roomTypeId,type,keyMoney,status));
-       }
+        }else {
+            tblCart.getItems().add(new CartTM(roomTypeId,type,keyMoney,status));
+        }
         cmbPaymentStatus.getSelectionModel().clearSelection();
         cmbRoomTypeId.getSelectionModel().clearSelection();
         btnRegister.requestFocus();
@@ -192,10 +195,7 @@ public class RegistrationFormController {
     private void enableOrDisableRegisterButton() {
         btnRegister.setDisable(!(cmbStudentId.getSelectionModel().getSelectedItem() != null && !tblCart.getItems().isEmpty()));
     }
-
-
     public void btnRegisterOnAction(ActionEvent actionEvent) {
-
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -227,6 +227,7 @@ public class RegistrationFormController {
                     studentDTO.setGender(s.getGender());
 
                 }
+
                 Reservation r = new Reservation();
                 r.setRes_id(lblReservation.getText());
                 r.setDate(LocalDate.now());
@@ -250,6 +251,11 @@ public class RegistrationFormController {
 
         session.close();
 
+        generateNewId();
+        cmbStudentId.getSelectionModel().clearSelection();
+        cmbRoomTypeId.getSelectionModel().clearSelection();
+        cmbPaymentStatus.getSelectionModel().clearSelection();
+        tblCart.getItems().clear();
     }
 
     private void generateNewId() {
