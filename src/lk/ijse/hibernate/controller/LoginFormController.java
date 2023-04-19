@@ -25,13 +25,24 @@ public class LoginFormController {
     public Label lblWrong;
     public AnchorPane loginFormContext;
     private final LogBO logBO = new LogBOImpl();
-    public void btnLoginOnAction(ActionEvent actionEvent) throws Exception {
 
+    public void btnLoginOnAction(ActionEvent actionEvent) throws Exception {
         if(txtUserName.getText().equals("") && txtPassword.getText().equals("")){
             lblWrong.setText("Please enter your UserName and Password");
 
         }else if (txtUserName.getText()!=null&& txtPassword.getText()!=null){
-           // List<UserDTO> userDetails = logBO.getUserDetails(txtUserName.getText(), txtPassword.getText());
+           List<UserDTO> userDetails = logBO.getUserDetails(txtUserName.getText(), txtPassword.getText());
+            UserDTO userDTO = new UserDTO();
+            for (UserDTO u : userDetails ) {
+                userDTO.setUserName(u.getUserName());
+                userDTO.setPassword(u.getPassword());
+            }
+            if (txtUserName.getText().equals(userDTO.getUserName()) && txtPassword.getText().equals(userDTO.getPassword())){
+                setUI("DashBoardForm");
+            }else{
+                new Alert(Alert.AlertType.WARNING,"Wrong UserName OR Password,Try Again!").show();
+            }
+
             setUI("DashBoardForm");
 
         }else {
@@ -40,7 +51,6 @@ public class LoginFormController {
     }
 
     private void setUI(String URI) throws IOException {
-
         Stage stage1= (Stage)loginFormContext.getScene().getWindow();
         stage1.close();
         URL resource = getClass().getResource("/lk/ijse/hibernate/view/"+URI+".fxml");

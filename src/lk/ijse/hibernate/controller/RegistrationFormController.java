@@ -102,6 +102,9 @@ public class RegistrationFormController {
                     e.printStackTrace();
                 }
             }else {
+                txtName.clear();
+                txtAddress.clear();
+                txtContactNo.clear();
 
             }
         });
@@ -127,7 +130,6 @@ public class RegistrationFormController {
                 txtType.clear();
                 txtKeyMoney.clear();
                 txtQty.clear();
-
             }
 
         });
@@ -144,9 +146,6 @@ public class RegistrationFormController {
                 }
             }
         });
-
-
-
     }
 
     private void setRoomId() {
@@ -243,7 +242,6 @@ public class RegistrationFormController {
 
             registrationBO.Register(tblCart.getItems(),cmbStudentId.getValue(),lblReservation.getText());
             System.out.println(tblCart.getItems());
-
 
 
         } catch (Exception e) {
